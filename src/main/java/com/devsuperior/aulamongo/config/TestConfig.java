@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import com.devsuperior.aulamongo.models.entities.User;
+import com.devsuperior.aulamongo.repositories.PostRepository;
 import com.devsuperior.aulamongo.repositories.UserRepository;
 
 @Configuration
@@ -17,10 +18,13 @@ public class TestConfig {
 	
 	@Autowired
 	private UserRepository userRepository;
+	@Autowired
+	private PostRepository postRepository;
 	
 	@PostConstruct
 	public void init() {
 		userRepository.deleteAll();
+		postRepository.deleteAll();
 		
 		User maria = new User(null, "Maria Brown", "maria@mail.com");
 		User alex = new User(null, "Alex Green", "alex@mail.com");

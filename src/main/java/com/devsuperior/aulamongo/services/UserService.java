@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.devsuperior.aulamongo.models.dto.PostDTO;
 import com.devsuperior.aulamongo.models.dto.UserDTO;
 import com.devsuperior.aulamongo.models.entities.User;
 import com.devsuperior.aulamongo.repositories.UserRepository;
@@ -45,6 +46,11 @@ public class UserService {
 	public void delete(String id) {
 		getEntityById(id);
 		repository.deleteById(id);
+	}
+	
+	public List<PostDTO> getUserPosts(String id) {
+		User user = getEntityById(id);
+		return user.getPosts().stream().map(x -> new PostDTO(x)).collect(Collectors.toList());
 	}
 	
 
